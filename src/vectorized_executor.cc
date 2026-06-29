@@ -12,8 +12,9 @@ namespace AetherGraph {
 VectorizedSeqScan::VectorizedSeqScan(GraphEngine& ge, const std::string& label)
     : ge_(ge), label_(label) {
     auto all = ge_.get_all_nodes();
-    for (auto* n : all) {
-        if (n->label == label_) {
+    for (const auto& pair : all) {
+        auto* n = pair.second;
+        if (n && n->label == label_) {
             nodes_.push_back(n);
         }
     }

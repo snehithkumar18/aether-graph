@@ -48,6 +48,7 @@ public:
 
     void append_undo(const UndoRecord& record) { undo_log_.push_back(record); }
     const std::vector<UndoRecord>& get_undo_log() const { return undo_log_; }
+    std::vector<UndoRecord>& get_undo_log_mut() { return undo_log_; }
 };
 
 class TransactionManager {

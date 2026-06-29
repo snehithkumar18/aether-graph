@@ -8,7 +8,7 @@ void TransactionManagerSavepoint::create_savepoint(
     txn_id_t txn_id, const std::string& name, const Transaction& txn) {
     Savepoint sp;
     sp.name = name;
-    sp.undo_log_index = txn.undo_log.size();
+    sp.undo_log_index = txn.get_undo_log().size();
     savepoints_[txn_id].push_back(sp);
 }
 
@@ -24,16 +24,17 @@ bool TransactionManagerSavepoint::rollback_to_savepoint(
     if (sp_it == it->second.end()) return false;
 
     size_t target_idx = sp_it->undo_log_index;
-    while (txn.undo_log.size() > target_idx) {
-        auto record = txn.undo_log.back();
-        txn.undo_log.pop_back();
+    auto& undo_log = txn.get_undo_log_mut();
+    while (undo_log.size() > target_idx) {
+        auto record = undo_log.back();
+        undo_log.pop_back();
 
-        // Revert the operation represented by the undo log record
-        if (record.type == UndoType::INSERT_NODE) {
-            ge.delete_node(record.node_id);
-        } else if (record.type == UndoType::DELETE_NODE) {
-            // Re-create node or restore properties
-        } else if (record.type == UndoType::UPDATE_PROPERTY) {
+        if (record.is_delete) {
+            Node* node = ge.get_node(record.node_id);
+            if (node) {
+                node->properties.erase(record.key);
+            }
+        } else {
             Node* node = ge.get_node(record.node_id);
             if (node) {
                 node->properties[record.key] = record.old_value;
