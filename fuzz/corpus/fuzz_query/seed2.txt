@@ -1,0 +1,1 @@
+MATCH NODE User WHERE name = 'Bob'
