@@ -58,7 +58,7 @@ void run_storage_and_partitioning_tests() {
         assert(read_ok_disk);
         std::vector<uint8_t> disk_rec;
         assert(read_p.read_record(0, disk_rec));
-        assert(disk_rec == std::vector<uint8_t>{10, 20, 30});
+        assert((disk_rec == std::vector<uint8_t>{10, 20, 30}));
     }
     std::remove(db_file.c_str());
 

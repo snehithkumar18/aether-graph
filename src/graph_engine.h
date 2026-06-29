@@ -114,6 +114,8 @@ struct Node {
     // Incoming edge references for cleanup
     std::vector<edge_id_t> in_edge_ids;
 
+    Node() : id(0), label("") {}
+
     Node(node_id_t nid, const std::string& nlabel)
         : id(nid), label(nlabel) {}
 
