@@ -1,6 +1,8 @@
 #include "query_engine.h"
 #include <cassert>
 #include <iostream>
+#include <memory>
+#include <string>
 
 void run_advanced_query_tests() {
     AetherGraph::DiskManager disk_mgr("test_adv.db");

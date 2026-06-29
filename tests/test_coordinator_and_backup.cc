@@ -4,6 +4,7 @@
 #include "query_compiler.h"
 #include <cassert>
 #include <iostream>
+#include <string>
 
 void run_coordinator_and_backup_tests() {
     AetherGraph::DiskManager disk_mgr("test_coord.db");

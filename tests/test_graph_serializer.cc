@@ -1,6 +1,8 @@
 #include "graph_serializer.h"
 #include <cassert>
 #include <iostream>
+#include <string>
+#include <vector>
 
 void run_graph_serializer_tests() {
     AetherGraph::DiskManager disk_mgr("test_ser.db");

@@ -1,6 +1,7 @@
 #include "bloom_filter.h"
 #include <cassert>
 #include <iostream>
+#include <string>
 
 void run_bloom_filter_tests() {
     // 1. Create a bloom filter with 1000 bits and 3 hash functions

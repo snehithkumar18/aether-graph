@@ -7,6 +7,7 @@
 #include <vector>
 #include <random>
 #include <cassert>
+#include <string>
 using namespace AetherGraph;
 
 static void run_benchmark_insertion(GraphEngine& ge, size_t node_count, size_t edge_count) {

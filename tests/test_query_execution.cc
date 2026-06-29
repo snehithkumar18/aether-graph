@@ -5,6 +5,8 @@
 #include "execution_plans.h"
 #include <cassert>
 #include <iostream>
+#include <memory>
+#include <vector>
 
 void run_query_execution_tests() {
     AetherGraph::DiskManager disk_mgr("test_qe.db");

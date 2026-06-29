@@ -4,6 +4,8 @@
 #include "graph_server.h"
 #include <cassert>
 #include <iostream>
+#include <string>
+#include <vector>
 
 void run_validation_and_projection_tests() {
     AetherGraph::DiskManager disk_mgr("test_val_proj.db");

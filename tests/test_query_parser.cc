@@ -1,6 +1,7 @@
 #include "query_parser.h"
 #include <cassert>
 #include <iostream>
+#include <string>
 
 void run_query_parser_tests() {
     // 1. Test parsing CREATE NODE query

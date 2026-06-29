@@ -1,6 +1,8 @@
 #include "metadata_manager.h"
 #include <cassert>
 #include <iostream>
+#include <string>
+#include <vector>
 
 void run_metadata_catalog_advanced_tests() {
     AetherGraph::MetadataManager meta;

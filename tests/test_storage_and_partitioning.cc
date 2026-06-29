@@ -4,6 +4,8 @@
 #include "graph_coordinator.h"
 #include <cassert>
 #include <iostream>
+#include <string>
+#include <vector>
 
 void run_storage_and_partitioning_tests() {
     // 1. Test SlottedPage storage

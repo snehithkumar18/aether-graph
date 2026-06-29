@@ -1,6 +1,7 @@
 #include "metadata_manager.h"
 #include <cassert>
 #include <iostream>
+#include <string>
 
 void run_metadata_manager_tests() {
     AetherGraph::MetadataManager meta;

@@ -2,6 +2,8 @@
 #include "concurrency_control.h"
 #include <cassert>
 #include <iostream>
+#include <string>
+#include <vector>
 
 void run_concurrency_and_wal_tests() {
     // 1. Test Concurrency Control Lock Table & Deadlocks
