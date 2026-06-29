@@ -5,6 +5,8 @@
 #include <atomic>
 #include <iostream>
 #include <string>
+using namespace AetherGraph;
+
 
 void run_performance_stress_queries_tests() {
     std::cout << "[BENCHMARK] Starting Stress Query Benchmarks...\n";

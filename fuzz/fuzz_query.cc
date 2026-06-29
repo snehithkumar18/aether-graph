@@ -4,6 +4,7 @@
 #include "wal_manager.h"
 #include "storage_compressor.h"
 #include "graph_serializer.h"
+#include "disk_storage.h"
 #include <cstdint>
 #include <cstddef>
 #include <cstdio>

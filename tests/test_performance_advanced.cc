@@ -7,6 +7,8 @@
 #include <vector>
 #include <random>
 #include <cassert>
+using namespace AetherGraph;
+
 
 void run_advanced_performance_benchmarks() {
     std::cout << "[BENCHMARK] Starting Advanced Performance Benchmarks...\n";

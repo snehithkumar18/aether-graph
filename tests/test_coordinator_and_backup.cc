@@ -5,6 +5,8 @@
 #include <cassert>
 #include <iostream>
 #include <string>
+using namespace AetherGraph;
+
 
 void run_coordinator_and_backup_tests() {
     AetherGraph::DiskManager disk_mgr("test_coord.db");

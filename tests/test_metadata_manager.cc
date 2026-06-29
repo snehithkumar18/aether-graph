@@ -2,6 +2,8 @@
 #include <cassert>
 #include <iostream>
 #include <string>
+using namespace AetherGraph;
+
 
 void run_metadata_manager_tests() {
     AetherGraph::MetadataManager meta;

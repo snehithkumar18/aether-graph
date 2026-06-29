@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+using namespace AetherGraph;
+
 
 void run_validation_and_projection_tests() {
     AetherGraph::DiskManager disk_mgr("test_val_proj.db");

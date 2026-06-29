@@ -2,6 +2,8 @@
 #include <cassert>
 #include <iostream>
 #include <cmath>
+using namespace AetherGraph;
+
 
 void run_graph_algorithms_tests() {
     AetherGraph::DiskManager disk_mgr("test_algo.db");

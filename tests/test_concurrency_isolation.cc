@@ -3,6 +3,8 @@
 #include <thread>
 #include <vector>
 #include <atomic>
+using namespace AetherGraph;
+
 
 void run_concurrency_isolation_tests() {
     AetherGraph::ConcurrencyControl cc;

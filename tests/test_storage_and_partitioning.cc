@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+using namespace AetherGraph;
+
 
 void run_storage_and_partitioning_tests() {
     // 1. Test SlottedPage storage

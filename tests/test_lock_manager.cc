@@ -1,6 +1,8 @@
 #include "lock_manager.h"
 #include <cassert>
 #include <iostream>
+using namespace AetherGraph;
+
 
 void run_lock_manager_tests() {
     AetherGraph::LockManager lm;

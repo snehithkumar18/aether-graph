@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <random>
+using namespace AetherGraph;
+
 
 void run_disk_storage_stress_tests() {
     AetherGraph::SlottedPage page(999);

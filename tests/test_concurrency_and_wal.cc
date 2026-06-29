@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+using namespace AetherGraph;
+
 
 void run_concurrency_and_wal_tests() {
     // 1. Test Concurrency Control Lock Table & Deadlocks

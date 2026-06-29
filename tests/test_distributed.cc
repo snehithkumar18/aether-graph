@@ -1,6 +1,8 @@
 #include "distributed_txn.h"
 #include <cassert>
 #include <iostream>
+using namespace AetherGraph;
+
 
 void run_distributed_tests() {
     AetherGraph::DiskManager disk_mgr("test_dist.db");

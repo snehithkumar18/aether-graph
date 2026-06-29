@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+using namespace AetherGraph;
+
 
 void run_metadata_catalog_advanced_tests() {
     AetherGraph::MetadataManager meta;

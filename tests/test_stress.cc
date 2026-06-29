@@ -7,6 +7,8 @@
 #include <random>
 #include <iostream>
 #include <cassert>
+using namespace AetherGraph;
+
 
 static void transaction_worker_thread(
     GraphEngine& ge, TransactionManager& tm, ConcurrencyControl& cc,

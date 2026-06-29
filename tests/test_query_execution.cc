@@ -7,6 +7,8 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+using namespace AetherGraph;
+
 
 void run_query_execution_tests() {
     AetherGraph::DiskManager disk_mgr("test_qe.db");

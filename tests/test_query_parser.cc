@@ -2,6 +2,8 @@
 #include <cassert>
 #include <iostream>
 #include <string>
+using namespace AetherGraph;
+
 
 void run_query_parser_tests() {
     // 1. Test parsing CREATE NODE query

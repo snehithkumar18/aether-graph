@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+using namespace AetherGraph;
+
 
 void run_graph_serializer_tests() {
     AetherGraph::DiskManager disk_mgr("test_ser.db");

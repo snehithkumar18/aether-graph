@@ -1,6 +1,8 @@
 #include "graph_analytics.h"
 #include <cassert>
 #include <iostream>
+using namespace AetherGraph;
+
 
 void run_graph_analytics_tests() {
     AetherGraph::DiskManager disk_mgr("test_an.db");

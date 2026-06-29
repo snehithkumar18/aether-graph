@@ -2,6 +2,8 @@
 #include <cassert>
 #include <iostream>
 #include <vector>
+using namespace AetherGraph;
+
 
 void run_bloom_filter_advanced_tests() {
     // Test different size configurations

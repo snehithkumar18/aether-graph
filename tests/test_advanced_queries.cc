@@ -3,6 +3,8 @@
 #include <iostream>
 #include <memory>
 #include <string>
+using namespace AetherGraph;
+
 
 void run_advanced_query_tests() {
     AetherGraph::DiskManager disk_mgr("test_adv.db");

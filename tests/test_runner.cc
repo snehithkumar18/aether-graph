@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+using namespace AetherGraph;
+
 
 // Test suites declarations
 void run_graph_algorithms_tests();
