@@ -14,6 +14,11 @@ using node_id_t = uint32_t;
 using edge_id_t = uint64_t;
 using lsn_t = uint64_t;
 
+enum class LockMode {
+    SHARED,
+    EXCLUSIVE
+};
+
 inline constexpr node_id_t INVALID_NODE_ID = 0;
 inline constexpr txn_id_t INVALID_TXN_ID = 0;
 

@@ -9,11 +9,6 @@
 
 namespace AetherGraph {
 
-enum class LockMode {
-    SHARED,
-    EXCLUSIVE
-};
-
 class ConcurrencyControl {
 private:
     std::mutex mutex_;

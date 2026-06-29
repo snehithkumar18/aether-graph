@@ -9,11 +9,6 @@
 
 namespace AetherGraph {
 
-enum class LockMode {
-    SHARED,
-    EXCLUSIVE
-};
-
 struct LockRequest {
     txn_id_t txn_id;
     LockMode lock_mode;
