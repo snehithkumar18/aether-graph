@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-using namespace AetherGraph;
 
 
 // Test suites declarations
