@@ -7,6 +7,7 @@
 #include <vector>
 #include <random>
 #include <cassert>
+using namespace AetherGraph;
 
 static void run_benchmark_insertion(GraphEngine& ge, size_t node_count, size_t edge_count) {
     auto start = std::chrono::high_resolution_clock::now();
