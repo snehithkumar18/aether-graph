@@ -1,14 +1,13 @@
 #ifndef AETHER_GRAPH_DISK_STORAGE_H
 #define AETHER_GRAPH_DISK_STORAGE_H
 
+#include "storage.h"
 #include <vector>
 #include <string>
 #include <fstream>
 #include <mutex>
 
 namespace AetherGraph {
-
-constexpr size_t PAGE_SIZE = 4096;
 
 struct SlottedPageHeader {
     uint32_t page_id;
