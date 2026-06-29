@@ -95,7 +95,7 @@ void QueryOptimizer::optimize_pushdowns(std::shared_ptr<OptimizerPlanNode>& node
     }
 }
 
-std::shared_ptr<OptimizerPlanNode> QueryOptimizer::generate_optimized_plan(const ParsedQuery& query) {
+std::shared_ptr<OptimizerPlanNode> QueryOptimizer::generate_optimized_plan(const ParsedQuery& query) const {
     std::shared_ptr<OptimizerPlanNode> root_node;
 
     if (query.type == QueryType::MATCH_NODE) {

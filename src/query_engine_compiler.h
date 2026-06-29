@@ -2,6 +2,7 @@
 #define AETHER_GRAPH_QUERY_ENGINE_COMPILER_H
 
 #include "execution_plans.h"
+#include "query_optimizer.h"
 #include <string>
 #include <vector>
 #include <memory>

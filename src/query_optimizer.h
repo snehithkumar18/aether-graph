@@ -31,6 +31,7 @@ struct OptimizerPlanNode {
     double estimated_rows = 0.0;
 
     std::vector<std::shared_ptr<OptimizerPlanNode>> children;
+    std::vector<std::string> projections;
 
     explicit OptimizerPlanNode(PlanNodeType t) : type(t) {}
 };
@@ -47,7 +48,7 @@ public:
     explicit QueryOptimizer(const GraphStatistics& stats) : stats_(stats) {}
     ~QueryOptimizer() = default;
 
-    std::shared_ptr<OptimizerPlanNode> generate_optimized_plan(const ParsedQuery& query);
+    std::shared_ptr<OptimizerPlanNode> generate_optimized_plan(const ParsedQuery& query) const;
 };
 
 } // namespace AetherGraph
