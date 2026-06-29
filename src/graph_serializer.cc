@@ -1,5 +1,6 @@
 #include "graph_serializer.h"
 #include <sstream>
+#include <set>
 #include <iomanip>
 #include <cstring>
 #include <algorithm>
