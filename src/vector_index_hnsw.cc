@@ -2,6 +2,8 @@
 #include <cmath>
 #include <algorithm>
 #include <queue>
+#include <mutex>
+#include <vector>
 
 namespace AetherGraph {
 

@@ -1,5 +1,8 @@
 #include "graph_statistics.h"
 #include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace AetherGraph {
 

@@ -7,6 +7,7 @@
 #include "property_index.h"
 #include <memory>
 #include <unordered_map>
+#include <string>
 
 namespace AetherGraph {
 

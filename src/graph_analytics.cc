@@ -7,6 +7,9 @@
 #include <numeric>
 #include <random>
 #include <unordered_set>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace AetherGraph {
 

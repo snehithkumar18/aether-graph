@@ -1,4 +1,5 @@
 #include "query_engine_compiler_pass.h"
+#include <memory>
 
 namespace AetherGraph {
 

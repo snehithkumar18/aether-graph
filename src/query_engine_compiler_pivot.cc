@@ -1,5 +1,8 @@
 #include "query_engine_compiler_pivot.h"
 #include <map>
+#include <string>
+#include <unordered_set>
+#include <vector>
 
 namespace AetherGraph {
 

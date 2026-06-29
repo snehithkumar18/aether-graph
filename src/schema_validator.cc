@@ -1,5 +1,8 @@
 #include "schema_validator.h"
 #include <regex>
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

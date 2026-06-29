@@ -1,5 +1,6 @@
 #include "query_engine_compiler_recursive.h"
 #include <queue>
+#include <unordered_set>
 
 namespace AetherGraph {
 

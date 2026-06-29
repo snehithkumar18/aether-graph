@@ -1,6 +1,7 @@
 #include "query_parser.h"
 #include <sstream>
 #include <algorithm>
+#include <string>
 
 namespace AetherGraph {
 

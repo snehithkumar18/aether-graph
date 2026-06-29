@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <random>
 #include <queue>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

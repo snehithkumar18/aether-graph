@@ -1,5 +1,6 @@
 #include "query_compiler_jit.h"
 #include <iostream>
+#include <vector>
 
 namespace AetherGraph {
 

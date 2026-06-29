@@ -1,6 +1,8 @@
 #include "cypher_parser.h"
 #include <algorithm>
 #include <cctype>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

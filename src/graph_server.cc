@@ -1,6 +1,9 @@
 #include "graph_server.h"
 #include "graph_serializer.h"
 #include <sstream>
+#include <mutex>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

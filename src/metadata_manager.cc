@@ -1,6 +1,7 @@
 #include "metadata_manager.h"
 #include <sstream>
 #include <iostream>
+#include <string>
 
 namespace AetherGraph {
 

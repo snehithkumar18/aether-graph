@@ -1,4 +1,7 @@
 #include "query_compiler.h"
+#include <memory>
+#include <string>
+#include <unordered_map>
 
 namespace AetherGraph {
 

@@ -1,6 +1,9 @@
 #include "disk_storage.h"
 #include <cstring>
 #include <iostream>
+#include <mutex>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

@@ -1,4 +1,5 @@
 #include "query_planner_decorrelate.h"
+#include <memory>
 
 namespace AetherGraph {
 

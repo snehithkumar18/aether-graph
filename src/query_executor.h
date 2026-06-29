@@ -7,6 +7,7 @@
 #include "query_parser.h"
 #include <vector>
 #include <unordered_set>
+#include <string>
 
 namespace AetherGraph {
 

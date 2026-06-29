@@ -1,5 +1,6 @@
 #include "query_engine_compiler.h"
 #include <iostream>
+#include <memory>
 
 namespace AetherGraph {
 

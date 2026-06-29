@@ -1,5 +1,6 @@
 #include "transaction_manager_savepoint.h"
 #include <algorithm>
+#include <string>
 
 namespace AetherGraph {
 

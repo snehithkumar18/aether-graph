@@ -1,5 +1,8 @@
 #include "property_index.h"
 #include <algorithm>
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

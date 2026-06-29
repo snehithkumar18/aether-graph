@@ -1,5 +1,7 @@
 #include "lock_manager_advanced.h"
 #include <algorithm>
+#include <mutex>
+#include <string>
 
 namespace AetherGraph {
 

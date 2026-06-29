@@ -5,6 +5,9 @@
 #include <cstring>
 #include <algorithm>
 #include <iostream>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace AetherGraph {
 

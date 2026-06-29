@@ -1,5 +1,8 @@
 #include "performance_metrics.h"
 #include <algorithm>
+#include <mutex>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

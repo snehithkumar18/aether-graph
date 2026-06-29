@@ -5,6 +5,7 @@
 #include "property_index.h"
 #include <vector>
 #include <memory>
+#include <string>
 
 namespace AetherGraph {
 

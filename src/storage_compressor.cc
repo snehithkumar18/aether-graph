@@ -1,5 +1,8 @@
 #include "storage_compressor.h"
 #include <queue>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace AetherGraph {
 

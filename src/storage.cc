@@ -1,5 +1,7 @@
 #include "storage.h"
 #include <algorithm>
+#include <fstream>
+#include <string>
 
 namespace AetherGraph {
 

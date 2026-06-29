@@ -1,6 +1,8 @@
 #include "graph_coordinator.h"
 #include <algorithm>
 #include <iostream>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

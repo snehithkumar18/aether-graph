@@ -1,4 +1,6 @@
 #include "execution_plans.h"
+#include <memory>
+#include <string>
 
 namespace AetherGraph {
 

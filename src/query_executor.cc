@@ -1,5 +1,8 @@
 #include "query_executor.h"
 #include <cstring>
+#include <string>
+#include <unordered_set>
+#include <vector>
 
 namespace AetherGraph {
 

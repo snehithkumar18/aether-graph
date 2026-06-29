@@ -1,6 +1,8 @@
 #include "graph_engine.h"
 #include <cstring>
 #include <algorithm>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

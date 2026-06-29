@@ -6,6 +6,7 @@
 #include <vector>
 #include <unordered_map>
 #include <memory>
+#include <unordered_set>
 
 namespace AetherGraph {
 

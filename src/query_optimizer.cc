@@ -1,4 +1,6 @@
 #include "query_optimizer.h"
+#include <memory>
+#include <string>
 
 namespace AetherGraph {
 

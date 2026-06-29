@@ -4,6 +4,7 @@
 #include "graph_engine.h"
 #include <vector>
 #include <memory>
+#include <string>
 
 namespace AetherGraph {
 

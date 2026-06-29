@@ -1,5 +1,8 @@
 #include "concurrency_control.h"
 #include <algorithm>
+#include <mutex>
+#include <unordered_set>
+#include <vector>
 
 namespace AetherGraph {
 

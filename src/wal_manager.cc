@@ -1,6 +1,11 @@
 #include "wal_manager.h"
 #include <cstring>
 #include <iostream>
+#include <fstream>
+#include <mutex>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace AetherGraph {
 

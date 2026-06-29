@@ -1,4 +1,5 @@
 #include "thread_pool.h"
+#include <mutex>
 
 namespace AetherGraph {
 

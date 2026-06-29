@@ -4,6 +4,7 @@
 #include "execution_plans.h"
 #include <unordered_set>
 #include <vector>
+#include <string>
 
 namespace AetherGraph {
 

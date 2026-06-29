@@ -2,6 +2,9 @@
 #include <cmath>
 #include <algorithm>
 #include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace AetherGraph {
 

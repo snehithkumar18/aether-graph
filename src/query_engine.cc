@@ -1,5 +1,9 @@
 #include "query_engine.h"
 #include <algorithm>
+#include <memory>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace AetherGraph {
 
