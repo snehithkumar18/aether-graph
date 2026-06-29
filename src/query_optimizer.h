@@ -40,9 +40,9 @@ class QueryOptimizer {
 private:
     const GraphStatistics& stats_;
 
-    double calculate_cost(const std::shared_ptr<OptimizerPlanNode>& node);
-    void optimize_pushdowns(std::shared_ptr<OptimizerPlanNode>& node);
-    std::shared_ptr<OptimizerPlanNode> choose_scan_method(const std::string& label, const std::string& key, const std::string& op, const Variant& val);
+    double calculate_cost(const std::shared_ptr<OptimizerPlanNode>& node) const;
+    void optimize_pushdowns(std::shared_ptr<OptimizerPlanNode>& node) const;
+    std::shared_ptr<OptimizerPlanNode> choose_scan_method(const std::string& label, const std::string& key, const std::string& op, const Variant& val) const;
 
 public:
     explicit QueryOptimizer(const GraphStatistics& stats) : stats_(stats) {}

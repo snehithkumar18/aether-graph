@@ -4,7 +4,7 @@
 
 namespace AetherGraph {
 
-double QueryOptimizer::calculate_cost(const std::shared_ptr<OptimizerPlanNode>& node) {
+double QueryOptimizer::calculate_cost(const std::shared_ptr<OptimizerPlanNode>& node) const {
     if (!node) return 0.0;
 
     double child_cost = 0.0;
@@ -45,7 +45,7 @@ double QueryOptimizer::calculate_cost(const std::shared_ptr<OptimizerPlanNode>& 
 }
 
 std::shared_ptr<OptimizerPlanNode> QueryOptimizer::choose_scan_method(
-    const std::string& label, const std::string& key, const std::string& op, const Variant& val) {
+    const std::string& label, const std::string& key, const std::string& op, const Variant& val) const {
 
     // Evaluate index lookup vs table scan
     double selectivity = stats_.estimate_node_selectivity(label, key, op, val);
@@ -74,7 +74,7 @@ std::shared_ptr<OptimizerPlanNode> QueryOptimizer::choose_scan_method(
     return filter_node;
 }
 
-void QueryOptimizer::optimize_pushdowns(std::shared_ptr<OptimizerPlanNode>& node) {
+void QueryOptimizer::optimize_pushdowns(std::shared_ptr<OptimizerPlanNode>& node) const {
     if (!node) return;
 
     for (auto& child : node->children) {
