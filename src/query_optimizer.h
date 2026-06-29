@@ -2,6 +2,7 @@
 #define AETHER_GRAPH_QUERY_OPTIMIZER_H
 
 #include "graph_statistics.h"
+#include "query_parser.h"
 #include <string>
 #include <vector>
 #include <memory>
