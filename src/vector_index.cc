@@ -1,6 +1,7 @@
 #include "vector_index.h"
 #include <cmath>
 #include <algorithm>
+#include <numeric>
 #include <random>
 #include <queue>
 #include <string>
@@ -120,6 +121,9 @@ std::vector<VectorSearchResult> VectorIndex::search_knn(
     // Perform distance calculation inside target partitions
     auto scan_bucket = [&](const std::vector<size_t>& vec_indices) {
         for (size_t idx : vec_indices) {
+            // BUG: No bounds check on idx against vectors_.size().
+            // If cluster_buckets_ contains stale indices from previous build_index calls
+            // or corrupted data, this causes out-of-bounds vector access.
             const auto& [nid, vec] = vectors_[idx];
             float dist = 0.0f;
             if (metric == "l2") {

@@ -5,6 +5,9 @@
 #include "storage_compressor.h"
 #include "graph_serializer.h"
 #include "disk_storage.h"
+#include "property_index.h"
+#include "graph_analytics.h"
+#include "cypher_parser.h"
 #include <cstdint>
 #include <cstddef>
 #include <cstdio>
@@ -40,8 +43,6 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
 
     // ---- Deserialization + property storage for type confusion coverage ----
     // Deserialize a variant from fuzz input and store it as a node property.
-    // If the deserialized type tag is inconsistent with the actual value,
-    // subsequent queries will trigger a type confusion crash.
     size_t deser_offset = 0;
     AetherGraph::Variant deserialized = graph_engine.deserialize_variant(data, size, deser_offset);
     if (deserialized.type != AetherGraph::DataType::NIL) {
@@ -56,9 +57,6 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         q.node_id = n1->id;
         q.has_property = true;
         q.property_key = "fuzz_prop";
-        // Use a STRING query value — if type tag was corrupted to STRING during
-        // deserialization but the actual data is a different type, the comparison
-        // in operator== will call get_string() on the corrupted variant
         q.property_value = AetherGraph::Variant(std::string("test"));
         std::vector<AetherGraph::Node*> results;
         executor.execute(deser_txn, q, results);
@@ -84,9 +82,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         }
     }
 
-    // ---- BFS stress test: star graph to trigger queue resize overflow ----
-    // Create a hub node with many outgoing edges so BFS enqueues 128+ nodes
-    // simultaneously, triggering the uint8_t capacity overflow
+    // ---- BFS stress test: star graph to trigger queue resize ----
+    // Create a hub node with many outgoing edges so BFS enqueues many nodes
     AetherGraph::Node* hub = graph_engine.create_node("Hub");
     size_t spoke_count = std::min(size, static_cast<size_t>(150));
     std::vector<AetherGraph::Node*> spokes;
@@ -107,33 +104,29 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         txn_mgr.commit(bfs_txn);
     }
 
-    // ---- JIT Compiler fuzzing for Bug 7 (stale property UAF) ----
+    // ---- JIT Compiler fuzzing ----
     if (size >= 15) {
         AetherGraph::QueryCompilerJIT jit;
-        // Node n1 was created in setup
         jit.compile_operator(graph_engine, nullptr);
         
-        // Randomly update or delete node n1 properties to invalidate the cached pointer
         if (data[0] % 2 == 0) {
             AetherGraph::Transaction* jit_txn = txn_mgr.begin_transaction();
             graph_engine.update_property(n1->id, "age", AetherGraph::Variant(static_cast<int32_t>(data[1])), jit_txn->get_txn_id());
             txn_mgr.commit(jit_txn);
         } else {
-            // Delete node n1
             graph_engine.delete_node(n1->id);
         }
         
-        // Execute compiled JIT bytecode
         std::vector<AetherGraph::Node*> jit_results;
         jit.execute(graph_engine, jit_results);
     }
 
-    // ---- Slotted Page fuzzing for Bug 4 (OOB write in compaction) ----
+    // ---- Slotted Page fuzzing ----
     if (size >= 20) {
         AetherGraph::SlottedPage sp(888);
         size_t offset_sp = 0;
         while (offset_sp + 4 < size) {
-            uint16_t rec_len = data[offset_sp++] % 150; // allows size 123
+            uint16_t rec_len = data[offset_sp++] % 150;
             std::vector<uint8_t> rec_data(rec_len, 0xAA);
             sp.insert_record(rec_data);
             if (data[offset_sp++] % 4 == 0) {
@@ -145,9 +138,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         }
     }
 
-    // ---- WAL recovery fuzzing for Bug 8 ----
+    // ---- WAL recovery fuzzing ----
     if (size >= 15) {
-        // Write raw fuzz data to a temporary log file to simulate recovery
         std::string log_name = "fuzz_wal.log";
         {
             std::ofstream out(log_name, std::ios::binary | std::ios::trunc);
@@ -161,7 +153,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         std::remove(log_name.c_str());
     }
 
-    // ---- Storage Compressor fuzzing for Bug 11 (Huffman double-free) ----
+    // ---- Storage Compressor fuzzing ----
     if (size >= 5) {
         AetherGraph::StorageCompressor compressor;
         std::vector<uint8_t> comp_input(data, data + size);
@@ -169,11 +161,42 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         compressor.decompress(compressed);
     }
 
-    // ---- Binary Deserialization fuzzing for Bug 9 ----
+    // ---- Binary Deserialization fuzzing ----
     if (size >= 12) {
         AetherGraph::GraphEngine bin_ge(cache_mgr);
         std::vector<uint8_t> bin_input(data, data + size);
         AetherGraph::GraphSerializer::import_from_binary(bin_ge, bin_input);
+    }
+
+    // ---- Property Index fuzzing for B-tree bounds check ----
+    if (size >= 10) {
+        AetherGraph::PropertyIndex pidx("test_key", 2);
+        for (size_t i = 0; i < std::min(size_t(20), size / 2); ++i) {
+            std::string key = "key" + std::to_string(i);
+            pidx.insert(key, i);
+        }
+        pidx.search("key5");
+    }
+
+    // ---- Graph Analytics fuzzing for histogram overflow ----
+    if (size >= 8) {
+        AetherGraph::Node* high_deg_node = graph_engine.create_node("HighDeg");
+        uint32_t edge_count = data[0] * 1000;
+        for (uint32_t i = 0; i < std::min(edge_count, uint32_t(10000)); ++i) {
+            AetherGraph::Node* temp = graph_engine.create_node("Temp");
+            graph_engine.create_edge(high_deg_node->id, temp->id, "TEMP");
+        }
+        AetherGraph::GraphAnalytics::compute_degree_distribution(graph_engine);
+    }
+
+    // ---- Cypher Parser fuzzing for escape sequences ----
+    if (size >= 5) {
+        std::string cypher_query = "MATCH (n:Label) WHERE n.name = \"";
+        for (size_t i = 0; i < std::min(size_t(10), size); ++i) {
+            cypher_query += static_cast<char>(data[i]);
+        }
+        cypher_query += "\" RETURN n";
+        AetherGraph::CypherParser::parse(cypher_query);
     }
 
     txn_mgr.clear();

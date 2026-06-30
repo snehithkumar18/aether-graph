@@ -312,7 +312,9 @@ void GraphEngine::trim_old_versions(Node* node, const std::string& key) {
             last_kept = current;
             current = current->prev;
         } else {
-            // Free this version and everything after it
+            // BUG: last_kept->prev is not updated after freeing the chain.
+            // If resolve_property is called later, it will follow the stale prev pointer
+            // into freed memory, causing Use-After-Free.
             PropertyVersion* to_free = current;
             while (to_free) {
                 PropertyVersion* next = to_free->prev;
@@ -386,6 +388,8 @@ Variant GraphEngine::deserialize_variant(const uint8_t* data, size_t size, size_
             if (offset + 2 > size) return Variant();
             uint16_t len = data[offset] | (data[offset + 1] << 8);
             offset += 2;
+            // BUG: No upper bound check on len. If len is very large (e.g., 0xFFFF),
+            // offset + len can overflow and pass the bounds check, causing OOB read.
             if (offset + len > size) return Variant();
             std::string val(reinterpret_cast<const char*>(data + offset), len);
             offset += len;

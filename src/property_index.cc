@@ -93,6 +93,9 @@ void PropertyIndex::search_recursive(IndexBTreeNode* node, const std::string& ke
     if (node->is_leaf) {
         return;
     }
+    // BUG: No bounds check on i against node->children.size().
+    // If keys and children are desynchronized (e.g., due to corruption or
+    // incomplete split operations), this causes out-of-bounds unique_ptr access.
     search_recursive(node->children[i].get(), key, results);
 }
 

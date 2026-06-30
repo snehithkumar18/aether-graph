@@ -63,6 +63,9 @@ DegreeStats GraphAnalytics::compute_degree_distribution(GraphEngine& ge) {
     stats.std_dev_degree = std::sqrt(sq_sum / degrees.size());
 
     // Histogram
+    // BUG: No upper bound check on max_degree. If max_degree is very large (e.g., UINT32_MAX),
+    // the resize operation will attempt to allocate an impossibly large vector,
+    // causing std::bad_alloc or integer overflow in the allocator.
     stats.degree_histogram.resize(stats.max_degree + 1, 0);
     for (uint32_t d : degrees) {
         stats.degree_histogram[d]++;

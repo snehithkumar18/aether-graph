@@ -1,0 +1,1 @@
+MATCH (n:Label) WHERE n.name = "test\"quote" RETURN n

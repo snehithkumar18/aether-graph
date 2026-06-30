@@ -513,6 +513,8 @@ static std::string read_string_bin(const std::vector<uint8_t>& buf, size_t& offs
     uint32_t len;
     std::memcpy(&len, &buf[offset], 4);
     offset += 4;
+    // BUG: No upper bound check on len. Large values can cause integer overflow
+    // in offset + len check, leading to OOB read in string constructor.
     if (offset + len > buf.size()) return "";
     std::string s(reinterpret_cast<const char*>(&buf[offset]), len);
     offset += len;

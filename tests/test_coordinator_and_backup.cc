@@ -2,6 +2,7 @@
 #include "backup_utility.h"
 #include "performance_metrics.h"
 #include "query_compiler.h"
+#include "transaction_manager.h"
 #include <cassert>
 #include <iostream>
 #include <string>

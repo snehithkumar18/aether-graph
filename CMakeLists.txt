@@ -5,7 +5,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Enable warnings for code quality
-add_compile_options(-Wall -Wextra)
+if(NOT MSVC)
+    add_compile_options(-Wall -Wextra)
+else()
+    add_compile_options(/W3)
+endif()
 
 # Source files
 set(SRC_FILES

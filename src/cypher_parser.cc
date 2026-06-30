@@ -40,6 +40,9 @@ std::vector<CypherToken> CypherParser::tokenize(const std::string& query) {
             std::string s;
             i++;
             while (i < query.size() && query[i] != quote) {
+                // BUG: No escape sequence handling. If a quote character is escaped (e.g., \" or \'),
+                // the parser treats it as the end of the string, causing malformed tokens.
+                // This can lead to buffer overflows or type confusion in later parsing stages.
                 s += query[i++];
             }
             if (i < query.size()) i++;

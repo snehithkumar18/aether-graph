@@ -1,5 +1,7 @@
 #include "query_executor.h"
 #include "query_parser.h"
+#include "vector_index.h"
+#include "graph_algorithms.h"
 #include <cstdint>
 #include <cstddef>
 #include <cstdio>
@@ -127,6 +129,27 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         }
 
         if (offset >= size) break;
+    }
+
+    // ---- Vector Index fuzzing for stale cluster indices ----
+    if (size >= 20) {
+        AetherGraph::VectorIndex vidx("embedding", 3);
+        for (size_t i = 0; i < std::min(size_t(10), size / 3); ++i) {
+            std::vector<float> vec = {1.0f, 2.0f, 3.0f};
+            vidx.add_vector(i, vec);
+        }
+        vidx.build_index(4);
+        // Rebuild with different cluster count to create stale indices
+        vidx.build_index(2);
+        std::vector<float> query = {1.0f, 2.0f, 3.0f};
+        vidx.search_knn(query, 5, "l2");
+    }
+
+    // ---- Graph Algorithms fuzzing for Dijkstra bounds check ----
+    if (size >= 15 && nodes.size() >= 2) {
+        node_id_t start = nodes[0]->id;
+        node_id_t end = nodes[1]->id;
+        AetherGraph::GraphAlgorithms::dijkstra(graph_engine, start, end, "weight");
     }
 
     // Cleanup
