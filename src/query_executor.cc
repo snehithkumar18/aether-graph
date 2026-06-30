@@ -64,8 +64,6 @@ bool QueryExecutor::bfs_path_exists(Node* start, Node* target) {
                 if (tail >= capacity) {
                     // Grow the queue buffer
                     uint8_t new_cap = capacity * 2;
-                    // BUG: Integer overflow when capacity >= 128. new_cap becomes 0 or small value,
-                    // causing allocation of insufficient buffer and subsequent heap buffer overflow.
                     Node** new_queue = new Node*[new_cap];
                     std::memcpy(new_queue, queue, tail * sizeof(Node*));
                     delete[] queue;

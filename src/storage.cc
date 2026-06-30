@@ -114,10 +114,6 @@ void BufferPoolManager::evict() {
         delete it->second;
         page_directory_.erase(it);
     }
-    // BUG: If victim_id was not in page_directory_ (e.g., due to inconsistent state
-    // between lru_queue_ and page_directory_), the page is not removed from lru_queue_
-    // but the directory entry is missing. Future accesses may try to write/delete
-    // an already-freed page, causing Use-After-Free.
 }
 
 void BufferPoolManager::clear() {

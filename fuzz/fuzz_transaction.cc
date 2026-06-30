@@ -147,8 +147,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
 
     // ---- Graph Algorithms fuzzing for Dijkstra bounds check ----
     if (size >= 15 && nodes.size() >= 2) {
-        node_id_t start = nodes[0]->id;
-        node_id_t end = nodes[1]->id;
+        AetherGraph::node_id_t start = nodes[0]->id;
+        AetherGraph::node_id_t end = nodes[1]->id;
         AetherGraph::GraphAlgorithms::dijkstra(graph_engine, start, end, "weight");
     }
 

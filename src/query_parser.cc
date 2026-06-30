@@ -29,10 +29,6 @@ ParsedQuery QueryParser::parse(const std::string& query_str) {
                     } else {
                         try {
                             size_t idx;
-                            // BUG: std::stoi can throw std::out_of_range for very large numbers.
-                            // If val_str represents a number larger than INT_MAX, stoi throws
-                            // and the value is treated as a string instead of a number,
-                            // causing type confusion bugs later.
                             int val = std::stoi(val_str, &idx);
                             if (idx == val_str.size()) {
                                 query.property_value = Variant(val);

@@ -151,9 +151,6 @@ bool WalManager::recover(GraphEngine& ge) {
 
         uint32_t s_len;
         in.read(reinterpret_cast<char*>(&s_len), 4);
-        // BUG: No upper bound check on s_len. If s_len is very large (e.g., 0xFFFFFFFF),
-        // resize can allocate huge memory or fail, and the subsequent read can cause
-        // heap buffer overflow or denial of service.
         rec.label_or_type.resize(s_len);
         in.read(&rec.label_or_type[0], s_len);
 

@@ -36,13 +36,9 @@ void TransactionManager::abort(Transaction* txn, GraphEngine& graph_engine) {
             if (record.is_delete) {
                 // Undo a property creation: remove the property
                 node->properties.erase(record.key);
-                // BUG: We do not clear/trim the corresponding entry in node->version_heads.
-                // This leaves an orphaned PropertyVersion head pointing to invalid/deleted state,
-                // causing subsequent reads or trim_old_versions to cause Use-After-Free.
             } else {
                 // Undo a property update: restore old value
                 node->properties[record.key] = record.old_value;
-                // BUG: We do not unlink the aborted version from the version chain.
             }
         }
     }

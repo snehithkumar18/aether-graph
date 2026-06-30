@@ -143,9 +143,6 @@ DijkstraResult GraphAlgorithms::dijkstra(
         node_id_t curr = end_node;
         while (curr != start_node) {
             result.path.push_back(curr);
-            // BUG: No check if curr exists in prev map before accessing.
-            // If the graph has disconnected components or the path reconstruction
-            // encounters a node not in prev, this causes an out-of-bounds map access.
             curr = prev[curr];
         }
         result.path.push_back(start_node);

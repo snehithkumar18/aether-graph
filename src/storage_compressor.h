@@ -26,8 +26,6 @@ private:
 public:
     StorageCompressor() = default;
     ~StorageCompressor() {
-        // BUG: If root_ is not null, delete it. But build_tree() already freed the tree
-        // using free_tree(), leading to a double-free of the HuffmanNode tree nodes.
         if (root_) {
             delete root_;
         }
